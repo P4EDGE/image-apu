@@ -1,0 +1,94 @@
+# set the deadline scheduler globally for better SSD performance
+d-i debian-installer/add-kernel-opts string video=off\
+ elevator=deadline console=ttyS0,115200
+
+
+d-i debian-installer/language string en
+d-i debian-installer/country string HU
+d-i debian-installer/locale string en_US.UTF-8
+
+d-i passwd/root-login boolean false
+
+d-i passwd/user-fullname string p4
+d-i passwd/username string p4
+
+d-i passwd/user-password password pcengines
+d-i passwd/user-password-again password pcengines
+
+d-i netcfg/get_hostname string p4edge
+
+d-i time/zone string Europe/Budapest
+d-i clock-setup/utc boolean true
+d-i clock-setup/ntp boolean true
+d-i clock-setup/ntp-server string pool.ntp.org
+
+popularity-contest popularity-contest/participate boolean false
+
+d-i partman-auto/choose_recipe select boot-root
+d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true
+d-i partman-auto/disk string /dev/sda
+d-i partman-auto/purge_lvm_from_device boolean true
+d-i partman-lvm/confirm boolean true
+
+d-i partman-auto/method string regular
+
+d-i partman-auto/expert_recipe string                         \
+      boot-root ::                                            \
+              128 50 128 ext4                                 \
+                      $primary{ } $bootable{ }                \
+                      method{ format } format{ }              \
+                      use_filesystem{ } filesystem{ ext4 }    \
+                      mountpoint{ /boot }                     \
+                      options/noatime{ noatime }              \
+              .                                               \
+              500 10000 1000000000 ext4                       \
+                      method{ format } format{ }              \
+                      use_filesystem{ } filesystem{ ext4 }    \
+                      mountpoint{ / }                         \
+                      options/noatime{ noatime }              \
+              .
+
+partman-basicfilesystems partman-basicfilesystems/no_swap boolean false
+
+d-i grub-installer/with_other_os  boolean false
+d-i grub-installer/bootdev  string default
+
+# The kernel image (meta) package to be installed; "none" can be used if no
+# kernel is to be installed.
+#d-i base-installer/kernel/image string linux-image-amd64
+
+d-i mirror/protocol string http
+d-i mirror/country string manual
+d-i mirror/http/hostname string deb.debian.org
+d-i mirror/http/directory string /debian
+d-i mirror/http/proxy string
+
+tasksel tasksel/first multiselect ssh-server
+d-i pkgsel/upgrade select none
+
+d-i apt-setup/local0/repository string \
+	http://download.opensuse.org/repositories/home:/p4edge/Debian_11/ /
+d-i apt-setup/local0/key string https://download.opensuse.org/repositories/home:p4edge/Debian_11/Release.key
+
+d-i apt-setup/local1/repository string \
+	http://download.opensuse.org/repositories/home:/p4lang/Debian_11/ /
+d-i apt-setup/local1/key string https://download.opensuse.org/repositories/home:p4lang/Debian_11/Release.key
+
+d-i pkgsel/include string net-tools dnsutils \
+  p4lang-pi \
+	p4lang-p4c \
+	p4lang-bmv2 \
+  p4edge-web \
+#  p4edge-examples \
+  dpdk \
+  dpdk-dev \
+  dpdk-doc \
+  netcat \
+  gdb \
+  git \
+  vim
+
+d-i debian-installer/exit/poweroff boolean true

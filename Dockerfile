@@ -15,4 +15,4 @@ RUN apt-get update && \
 
 USER $USERNAME
 WORKDIR /home/$USERNAME/build_image
-CMD ["build-simple-cdd", "--dist", "bullseye"]
+CMD ["build-simple-cdd", "--profiles", "p4edge", "--dist", "bullseye"]
