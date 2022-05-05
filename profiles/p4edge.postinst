@@ -104,4 +104,6 @@ EOF
 
 chmod 644 /usr/bin/t4p4s-start
 
+ln -s /usr/share/p4edge/t4p4s /root/t4p4s/examples/p4edge
+
 systemctl enable t4p4s

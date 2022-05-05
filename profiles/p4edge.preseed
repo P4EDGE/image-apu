@@ -77,7 +77,7 @@ d-i pkgsel/include string net-tools dnsutils \
 	p4lang-p4c \
 	p4lang-bmv2 \
   p4edge-web \
-#  p4edge-examples \
+  p4edge-examples \
   dpdk \
   dpdk-dev \
   dpdk-doc \
