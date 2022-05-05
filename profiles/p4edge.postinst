@@ -105,4 +105,3 @@ EOF
 chmod 644 /usr/bin/t4p4s-start
 
 systemctl enable t4p4s
-#shutdown now

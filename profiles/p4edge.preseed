@@ -2,7 +2,6 @@
 d-i debian-installer/add-kernel-opts string video=off\
  elevator=deadline console=ttyS0,115200
 
-
 d-i debian-installer/language string en
 d-i debian-installer/country string HU
 d-i debian-installer/locale string en_US.UTF-8
@@ -55,10 +54,6 @@ partman-basicfilesystems partman-basicfilesystems/no_swap boolean false
 
 d-i grub-installer/with_other_os  boolean false
 d-i grub-installer/bootdev  string default
-
-# The kernel image (meta) package to be installed; "none" can be used if no
-# kernel is to be installed.
-#d-i base-installer/kernel/image string linux-image-amd64
 
 d-i mirror/protocol string http
 d-i mirror/country string manual
