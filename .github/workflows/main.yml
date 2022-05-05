@@ -1,0 +1,23 @@
+name: Build image
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v3
+
+      - name: Run build script
+        id: build
+        run: ./build.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.build.outputs.imgname }}
+          path: dist/*.iso
+          if-no-files-found: error
