@@ -81,6 +81,7 @@ d-i pkgsel/include string net-tools dnsutils \
   dpdk \
   dpdk-dev \
   dpdk-doc \
+  ninja-build \
   netcat \
   gdb \
   git \
